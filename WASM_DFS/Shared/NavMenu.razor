@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<div class="bg-light" id="sidebar-wrapper">
+
+	<div class="menu list-group list-group-flush">
+
+		<NavLink class="list-group-item list-group-item-action bg-light"
+				 href="authentication/login">
+			<span class="oi oi-list-rich" aria-hidden="true"></span> Log in
+		</NavLink>
+		<button class="list-group-item list-group-item-action bg-light" @onclick="BeginSignOut">
+			<span class="oi oi-list-rich" aria-hidden="true"></span> Log out
+		</button>
+	</div>
+</div>
+
+@code {
+	private async Task BeginSignOut(MouseEventArgs args)
+	{
+		await SignOutManager.SetSignOutState();
+		Navigation.NavigateTo("authentication/logout");
+	}
+}
